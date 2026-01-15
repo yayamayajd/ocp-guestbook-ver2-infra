@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+matadata: 
+  name: {{ .Values.frotend.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.frontend.replicas}}
+  selector:
+    matchLabels:
+      app: guestbook-frontend
+  template:
+    matadata:
+    labels:
+      app: guestbook-frontend
+    spec:
+      containers:
+        - name: {{ .Values.frotend.name }}
+          image: {{ .Values.frontend.image }}
+          ports:
+            - containerPort: {{ .Values.frontend.containerPort }}

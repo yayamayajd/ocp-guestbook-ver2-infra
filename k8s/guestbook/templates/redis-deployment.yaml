@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.redis.name }}
+  namespace: {{ .Values.namespace }} 
+spec:
+  replicas: {{ .Values.redis.replicas}}
+  selector:
+    matchLabels:
+      app: guestbook-redis
+  template:
+    metadata:
+      labels:
+      app: guestbook-redis
+    spec:
+      containers:
+        - name: {{ .Values.redis.name }}
+          image: {{ .Values.redis.image }}
+          ports:
+            - containerPort: {{ .Values.redis.containerPort }}
+          volumeMounts:
+            - name: {{ .Values.redis.storagename}}
+              mountPath: {{ .Values.redis.mountPath}}
+      volumes:
+        - name: {{ .Values.redis.storagename}}
+          persistentVolumeClaim:
+            claimName: {{ .Values.redis.pvcname}}
