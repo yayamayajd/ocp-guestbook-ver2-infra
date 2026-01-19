@@ -4,4 +4,9 @@ matadata:
   name: {{ .Values.redis.pvcname }}
   namespace: {{ .Values.namespace }}
 spec:
-  
+  accessModes:
+    - {{ .Values.redis.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.redis.storagesize }}
+  storageClassName: {{ .Values.redis.storageClass }}

@@ -23,11 +23,11 @@ spec:
           - containerPort: {{ .Values.postgres.containerPort }} 
             name: {{ .Values.postgres.name }}
           volumeMounts:
-          - name: {{ .Values.postgres.pv-name }}  
+          - name: {{ .Values.postgres.storagename }}  
             mountPath:  {{ .Values.postgres.mountPath }}       # /var/lib/pgsql/data
   volumeClaimTemplates:
   - metadata:
-      name: {{ .Values.postgres.pv-name }}
+      name: {{ .Values.postgres.storagename }}
     spec:
       accessModes: 
         - {{ .Values.postgres.accessModes }}

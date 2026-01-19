@@ -9,7 +9,7 @@ spec:
   selector:
     app: guestbook-redis
   ports:
-    - name: {{ .Values.redis.svcport-name }}
+    - name: {{ .Values.redis.svcportname }}
       port: {{ .Values.redis.svcport }}      # 6379
       targetPort: {{ .Values.redis.svctargetPort }}  #6379
   type: {{ .Values.redis.svctype }} 

@@ -10,4 +10,4 @@ spec:
     kind: Service
     name: {{ .Values.frontend.svcname }}
   port:
-    targetPort: {{ .Values.frontend.svcport-name }}
+    targetPort: {{ .Values.frontend.svcportname }}

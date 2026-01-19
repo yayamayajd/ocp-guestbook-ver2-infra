@@ -7,7 +7,7 @@ backend:
   containerPort: 8080
 
   svcname: backend
-  svcport-name: http
+  svcport_name: http
   svcport: 8080
   targetPort: 8080
   svctype: ClusterIP
@@ -20,7 +20,7 @@ frontend:
   containerPort: 8080
 
   svcname: frontend
-  svcport-name: web
+  svcportname: web
   svcport: 8080
   targetPort: 8080
   svctype: ClusterIP
@@ -33,11 +33,34 @@ redis:
   containerPort: 6379
   
   svcname: redis
-  svcport-name: redis
+  svcportname: redis
   svcport: 6379
   targetPort: 6379
   svctype: ClusterIP
 
+  pvcname: redispvc
+  accessModes: "ReadWriteOnce"
+  storagesize: 500Mi
+  storageClass:
+
+
+postgres:
+  name: postgres
+  image: quay.io/fedora/postgresql-16:latest
+  replicas: 1
+  containerPort: 5432
+  minReadySeconds: 10
+  terminationGracePeriodSeconds: 30
+  mountPath: /var/lib/pgsql/data
+  storagename: postgres_storage
+  accessModes: "ReadWriteOnce"
+  storageClassName: 
+  storageSize: 1Gi
+
+  svcname: postgres
+  svcportname: http
+  svcport: 5432
+  targetPort: 5432
 
 
 

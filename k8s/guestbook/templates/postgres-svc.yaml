@@ -7,7 +7,7 @@ metadata:
 spec:
   ports:
   - port: {{ .Values.postgres.svcport }}
-    name: {{ .Values.postgres.svcport-name }}
+    name: {{ .Values.postgres.svcportname }}
   clusterIP: None                      # headless svc for statefulset
   selector:
     app: guestbook-postgres

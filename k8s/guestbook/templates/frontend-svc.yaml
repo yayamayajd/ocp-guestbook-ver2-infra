@@ -9,7 +9,7 @@ spec:
   selector:
     app: guestbook-frontend
   ports:
-    - name: {{ .Values.frontend.svcport-name }}
+    - name: {{ .Values.frontend.svcportname }}
       port: {{ .Values.frontend.svcport }}      # 8080
       targetPort: {{ .Values.frontend.targetPort }}  #8080
   type: {{ .Values.frontend.svctype }} 

@@ -1,0 +1,10 @@
+apiVersion: v1 
+kind: ConfigMap
+metadata:
+  name: {{ .Values.frontend.name }}-config
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: guestbook-frontend
+data:
+  nginx.conf: |
+{{ .Files.Get "files/nginx.conf" | nindent 4 }}
