@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route 
+metadata:
+  name: {{ .Values.frontend.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: guestbook-frontend
+spec:
+  to: 
+    kind: Service
+    name: {{ .Values.frontend.svcname }}
+  port:
+    targetPort: {{ .Values.frontend.svcport-name }}

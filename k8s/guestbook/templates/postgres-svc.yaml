@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.postgres.svcname }}
+  labels:
+    app: guestbook-postgres
+spec:
+  ports:
+  - port: {{ .Values.postgres.svcport }}
+    name: {{ .Values.postgres.svcport-name }}
+  clusterIP: None                      # headless svc for statefulset
+  selector:
+    app: guestbook-postgres

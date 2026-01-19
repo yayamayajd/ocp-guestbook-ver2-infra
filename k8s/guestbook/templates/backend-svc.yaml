@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.backend.svcname }}   # backend
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: guestbook-backend
+spec:
+  selector:
+    app: guestbook-backend
+  ports:
+    - name: {{ .Values.backend.svcport-name }}
+      port: {{ .Values.backend.svcport }}      # 8080
+      targetPort: {{ .Values.backend.targetPort }}  #8080
+  type: {{ .Values.backend.svctype }} 

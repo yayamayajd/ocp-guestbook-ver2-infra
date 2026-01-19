@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 matadata: 
-  name: {{ .Values.frotend.name }}
+  name: {{ .Values.frontend.name }}
   namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.frontend.replicas}}
@@ -14,7 +14,7 @@ spec:
       app: guestbook-frontend
     spec:
       containers:
-        - name: {{ .Values.frotend.name }}
+        - name: {{ .Values.frontend.name }}
           image: {{ .Values.frontend.image }}
           ports:
             - containerPort: {{ .Values.frontend.containerPort }}

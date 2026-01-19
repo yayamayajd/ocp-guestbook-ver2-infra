@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.redis.svcname }}   # backend
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: guestbook-redis
+spec:
+  selector:
+    app: guestbook-redis
+  ports:
+    - name: {{ .Values.redis.svcport-name }}
+      port: {{ .Values.redis.svcport }}      # 6379
+      targetPort: {{ .Values.redis.svctargetPort }}  #6379
+  type: {{ .Values.redis.svctype }} 

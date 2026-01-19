@@ -1,0 +1,43 @@
+namespace: jiadai-dev
+
+backend:
+  name: backend
+  replicas: 2
+  image:
+  containerPort: 8080
+
+  svcname: backend
+  svcport-name: http
+  svcport: 8080
+  targetPort: 8080
+  svctype: ClusterIP
+
+
+frontend: 
+  name: frontend
+  replicas: 2
+  image:
+  containerPort: 8080
+
+  svcname: frontend
+  svcport-name: web
+  svcport: 8080
+  targetPort: 8080
+  svctype: ClusterIP
+
+
+redis:
+  name: redis
+  replicas: 1
+  image: quay.io/kurs/redis:latest
+  containerPort: 6379
+  
+  svcname: redis
+  svcport-name: redis
+  svcport: 6379
+  targetPort: 6379
+  svctype: ClusterIP
+
+
+
+

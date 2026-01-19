@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.postgres.name }}
+  namespace: {{ .Values.namespace }}  
+spec:
+  replicas: {{ .Values.postgres.replicas}}
+  minReadySeconds: {{ .Values.postgres.minReadySeconds}}
+  serviceName: {{ .Values.postgres.svcname}}
+  selector: 
+    matchLabels:
+      app: guestbook-postgres
+  template:
+    metadata:
+      labels:
+        app: guestbook-postgres
+    spec:
+      terminationGracePeriodSeconds: {{ .Values.postgres.terminationGracePeriodSeconds}}   # 30-60 sec?
+      containers:
+        - name: {{ .Values.postgres.name }}
+          image: {{ .Values.postgres.image }} 
+          ports:
+          - containerPort: {{ .Values.postgres.containerPort }} 
+            name: {{ .Values.postgres.name }}
+          volumeMounts:
+          - name: {{ .Values.postgres.pv-name }}  
+            mountPath:  {{ .Values.postgres.mountPath }}       # /var/lib/pgsql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Values.postgres.pv-name }}
+    spec:
+      accessModes: 
+        - {{ .Values.postgres.accessModes }}
+      storageClassName: {{ .Values.postgres.storageClassName}}
+      resources:
+        requests:
+          storage: {{ .Values.postgres.storageSize}}

@@ -1,0 +1,7 @@
+apiVersion: v1 
+kind: PersistentVolumeClaim 
+matadata: 
+  name: {{ .Values.redis.pvcname }}
+  namespace: {{ .Values.namespace }}
+spec:
+  
