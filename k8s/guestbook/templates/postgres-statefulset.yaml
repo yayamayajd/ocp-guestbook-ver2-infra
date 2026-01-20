@@ -18,6 +18,15 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.postgres.terminationGracePeriodSeconds}}   # 30-60 sec?
       containers:
         - name: {{ .Values.postgres.name }}
+          env:
+            - name: DB_USER
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ .Values.postgres.dbusername }}
+
+# how should i handle secrets?
+
+
           image: {{ .Values.postgres.image }} 
           ports:
           - containerPort: {{ .Values.postgres.containerPort }} 
