@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-      app: guestbook-redis
+        app: guestbook-redis
     spec:
       containers:
         - name: {{ .Values.redis.name }}

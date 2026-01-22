@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
-matadata: 
+metadata: 
   name: {{ .Values.frontend.name }}
   namespace: {{ .Values.namespace }}
 spec:
@@ -9,12 +9,20 @@ spec:
     matchLabels:
       app: guestbook-frontend
   template:
-    matadata:
-    labels:
-      app: guestbook-frontend
+    metadata:
+      labels:
+        app: guestbook-frontend
     spec:
       containers:
         - name: {{ .Values.frontend.name }}
           image: {{ .Values.frontend.image }}
           ports:
             - containerPort: {{ .Values.frontend.containerPort }}
+          volumeMounts:
+            - name: {{ .Values.frontend.cmname}}
+              mountPath: {{ .Values.frontend.cmPath}}
+              subPath: {{ .Values.frontend.cmsubPath}}
+      volumes:
+        - name: {{ .Values.frontend.cmname}}
+          configMap:
+            name: {{ .Values.frontend.name }}-config

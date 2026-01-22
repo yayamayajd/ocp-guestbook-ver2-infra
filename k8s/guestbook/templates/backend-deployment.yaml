@@ -9,15 +9,30 @@ spec:
     matchLabels:
       app: guestbook-backend
   template:
-    matadata:
+    metadata:
       labels:
-      app: guestbook-backend
+        app: guestbook-backend
     spec:
       containers:
         - name: {{ .Values.backend.name }}
           image: {{ .Values.backend.image }}
           ports:
             - containerPort: {{ .Values.backend.containerPort }}
+          env:
+          - name: DB_HOST
+            value: {{ .Values.backend.dbhost }}
+          - name: DB_PORT
+            value: {{ .Values.backend.dbport }}
+          - name: DB_USER
+            value: {{ .Values.backend.dbuser }}
+          - name: DB_NAME
+            value: {{ .Values.backend.dbname }}
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRESQL_PASSWORD          
+            
 
       
 

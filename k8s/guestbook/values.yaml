@@ -3,8 +3,14 @@ namespace: jiadai-dev
 backend:
   name: backend
   replicas: 2
-  image: ghcr.io/yayamayajd/guestbook-api:sha256-14d2a2703a9f77d49f7bb94d15e7428e574616dab4714a35f3bc14e1e695fd85
+  image: ghcr.io/yayamayajd/guestbook-api@sha256:14d2a2703a9f77d49f7bb94d15e7428e574616dab4714a35f3bc14e1e695fd85
   containerPort: 8080
+
+  dbhost: postgres
+  dbport: 5432
+  dbuser: guestbook
+  dbname: guestbook
+  
 
   svcname: backend
   svcport_name: http
@@ -16,8 +22,11 @@ backend:
 frontend: 
   name: frontend
   replicas: 2
-  image: ghcr.io/yayamayajd/guestbook-web:sha256-04e7253de8a52531bd280b971b1fb8b946db2d1742bcea666a0de457b866bad1
+  image: ghcr.io/yayamayajd/guestbook-web@sha256:04e7253de8a52531bd280b971b1fb8b946db2d1742bcea666a0de457b866bad1
   containerPort: 8080
+  cmname: nginx-conf
+  cmPath: /opt/app-root/etc/nginx.d/
+  cmsubPath: server.conf
 
   svcname: frontend
   svcportname: web
@@ -41,7 +50,9 @@ redis:
   pvcname: redispvc
   accessModes: "ReadWriteOnce"
   storagesize: 500Mi
-  storageClass:
+  storageClass: gp3
+  storagename: redispvc
+  mountPath: /data
 
 
 postgres:
@@ -52,15 +63,20 @@ postgres:
   minReadySeconds: 10
   terminationGracePeriodSeconds: 30
   mountPath: /var/lib/pgsql/data
-  storagename: postgres_storage
+  storagename: postgres-storage
   accessModes: "ReadWriteOnce"
-  storageClassName: 
+  storageClassName: gp3
   storageSize: 1Gi
+
+  user: guestbook
+  database: guestbook
+
 
   svcname: postgres
   svcportname: http
   svcport: 5432
   targetPort: 5432
+
 
 
 

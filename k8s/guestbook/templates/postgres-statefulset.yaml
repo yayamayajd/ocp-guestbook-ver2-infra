@@ -19,12 +19,15 @@ spec:
       containers:
         - name: {{ .Values.postgres.name }}
           env:
-            - name: DB_USER
-              valueFrom: 
+            - name: POSTGRESQL_USER
+              value: {{ .Values.postgres.user }}
+            - name: POSTGRESQL_DATABASE
+              value: {{ .Values.postgres.database }}
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.postgres.dbusername }}
-
-# how should i handle secrets?
+                  name: postgres-secret
+                  key: POSTGRESQL_PASSWORD    #need to create a secrets in cluster
 
 
           image: {{ .Values.postgres.image }} 
