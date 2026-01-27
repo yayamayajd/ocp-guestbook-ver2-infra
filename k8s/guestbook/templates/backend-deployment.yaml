@@ -45,17 +45,19 @@ spec:
                 key: REDIS_PASSWORD   
           livenessProbe:
             httpGet:
-              path: {{ .Values.backend.livenessProbe.path }}                         #/health
+              path: {{ .Values.backend.livenessProbe.path | quote }}                         #/health
               port: {{ .Values.backend.containerPort }}                        # 8080
             initialDelaySeconds: {{ .Values.backend.livenessProbe.initialDelaySeconds }}              #10
-            periodSeconds:   {{ .Values.backend.livenessProbe.periodSeconds }}  
+            periodSeconds:   {{ .Values.backend.livenessProbe.periodSeconds }} 
+            failureThreshold:  {{ .Values.backend.livenessProbe.failureThreshold }}   
                         #10
           readinessProbe:
             httpGet:
-              path: {{ .Values.backend.livenessProbe.path }}                         #/health
+              path: {{ .Values.backend.livenessProbe.path | quote }}                         #/health
               port: {{ .Values.backend.containerPort }} 
             initialDelaySeconds: {{ .Values.backend.readinessProbe.initialDelaySeconds }}              #10
-            periodSeconds:   {{ .Values.backend.readinessProbe:.periodSeconds }}              
+            periodSeconds:   {{ .Values.backend.readinessProbe.periodSeconds }}
+            failureThreshold:  {{ .Values.backend.readinessProbe.failureThreshold }}             
 
       
 
