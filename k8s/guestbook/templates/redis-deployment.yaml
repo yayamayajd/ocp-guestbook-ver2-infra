@@ -26,10 +26,3 @@ spec:
 
           ports:
             - containerPort: {{ .Values.redis.containerPort }}
-          volumeMounts:
-            - name: {{ .Values.redis.storagename}}
-              mountPath: {{ .Values.redis.mountPath}}
-      volumes:
-        - name: {{ .Values.redis.storagename}}
-          persistentVolumeClaim:
-            claimName: {{ .Values.redis.pvcname}}

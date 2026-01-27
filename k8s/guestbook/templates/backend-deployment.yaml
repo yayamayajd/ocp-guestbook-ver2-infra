@@ -42,8 +42,14 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: redis-secret
-                key: REDIS_PASSWORD      
-            
+                key: REDIS_PASSWORD   
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.backend.livenessProbe.path }}                         #/health
+              port: {{ .Values.backend.livenessProbe.port }}                        # 8080
+            initialDelaySeconds: {{ .Values.backend.livenessProbe.initialDelaySeconds }}              #30
+            periodSeconds:   {{ .Values.backend.livenessProbe.periodSeconds }}                #10
+   
 
       
 

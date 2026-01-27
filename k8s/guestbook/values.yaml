@@ -9,6 +9,13 @@ backend:
     imagePullPolicy: IfNotPresent
   containerPort: 8080
 
+  livenessProbe:
+    path: "/health"
+    port: 8080
+    initialDelaySeconds: 30
+    periodSeconds: 10
+
+
   dbhost: "postgres"
   dbport: 5432
   dbuser: "guestbook"
@@ -59,12 +66,7 @@ redis:
   svctargetPort: 6379
   svctype: ClusterIP
 
-  pvcname: redispvc
-  accessModes: "ReadWriteOnce"
-  storagesize: 500Mi
-  storageClass: gp3
-  storagename: redispvc
-  mountPath: /data
+
 
 
 
