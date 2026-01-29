@@ -1,4 +1,4 @@
-namespace: jiadai-dev
+namespace: project-jiadai
 
 backend:
   name: backend
@@ -87,7 +87,7 @@ postgres:
   mountPath: /var/lib/pgsql/data
   storagename: postgres-storage
   accessModes: "ReadWriteOnce"
-  storageClassName: "gp3"
+  storageClassName: "lvms-vg1"
   storageSize: 1Gi
 
   user: guestbook
