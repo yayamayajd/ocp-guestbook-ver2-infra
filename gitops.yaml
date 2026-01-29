@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-gitops
+  namespace: project-jiadai
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: .
+    repoURL: 'https://github.com/yayamayajd/ocp-guestbook-ver2-infra/tree/main/k8s/guestbook'
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true       # set here as the unik code source
